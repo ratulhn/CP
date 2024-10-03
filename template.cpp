@@ -1,9 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 #include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
-typedef tree<int,null_type,less<int>,rb_tree_tag,
-tree_order_statistics_node_update> ordered_set;
+template<class T> 
+using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>; // find_by_order, order_of_key
+
 #define FastIO ios::sync_with_stdio(false);cin.tie(nullptr);
 #define dbg(v) cout << "Line(" << __LINE__ << ") -> " << #v << " = " << (v) << "\n";
 #include "debugging.h"
@@ -14,18 +16,12 @@ tree_order_statistics_node_update> ordered_set;
 
 const int M = 1e9+7;
 
-
-
-
-
-
-
 int main() {
     FastIO
-    
-    
 
 
+
+    
 
 
     #ifndef ONLINE_JUDGE
@@ -33,5 +29,4 @@ int main() {
     #endif
 
     return 0;
-    
 }
