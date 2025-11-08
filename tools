@@ -87,3 +87,25 @@ void prime() {
         }
     }
 }
+// calculating the count of x in the number n
+int calc_func(int n, int x)
+{
+    int c = 0;
+    while(n>0)
+    {
+        c+=n/x;
+        n = n / x;
+    }
+    return c;
+}
+/ calculate the count of power of x in the prime factorization of n
+int func(int n, int x)
+{
+    int c = 0;
+    while(n % x == 0)
+    {
+        c++;
+        n = n / x;
+    }
+    return c;
+}
