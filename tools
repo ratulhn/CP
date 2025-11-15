@@ -109,3 +109,74 @@ int func(int n, int x)
     }
     return c;
 }
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll = long long;
+
+/* -------- Fast modular exponentiation -------- */
+ll modpow(ll a, ll b, ll mod) {
+    ll r = 1;
+    while (b > 0) {
+        if (b & 1) r = (__int128)r * a % mod;
+        a = (__int128)a * a % mod;
+        b >>= 1;
+    }
+    return r;
+}
+
+/* -------- Euler Totient Function -------- */
+ll phi(ll n) {
+    ll result = n;
+    for (ll p = 2; p * p <= n; p++) {
+        if (n % p == 0) {
+            while (n % p == 0) n /= p;
+            result -= result / p;
+        }
+    }
+    if (n > 1) result -= result / n;
+    return result;
+}
+
+/* -------- Recursive power-tower solver -------- */
+ll solveTower(vector<ll> &a, int i, ll mod) {
+    if (mod == 1) return 0;               // anything mod 1 = 0
+    if (i == a.size() - 1)                // last element of tower
+        return a[i] % mod;
+
+    ll nextMod = phi(mod);                // reduce exponent mod φ(mod)
+    ll exponent = solveTower(a, i + 1, nextMod);
+
+    /*
+        IMPORTANT TRICK:
+        Exponent might be too small after mod,
+        so we add nextMod to ensure correctness.
+    */
+    return modpow(a[i] % mod, exponent + nextMod, mod);
+}
+
+/* ------------------- MAIN ------------------- */
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int T; 
+    cin >> T;
+    while (T--) {
+
+        int n;
+        cin >> n;               // length of power tower
+        
+        vector<ll> a(n);
+        for (int i = 0; i < n; i++) cin >> a[i];
+
+        const ll M = 1e9 + 7;   // given prime modulus
+
+        cout << solveTower(a, 0, M) << "\n";
+    }
+
+    return 0;
+}
+
